@@ -1,0 +1,3 @@
+Model,Metric,Value
+Regression (Random Forest),R² Score,0.9409
+Classification (Random Forest),Accuracy,0.8693
