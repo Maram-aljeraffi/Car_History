@@ -16,5 +16,6 @@
 الخلفية / واجهة البرمجة: Flask
 
 التعلم الآلي: Scikit-Learn, Pandas, NumPy
-
-التخزين ومعالجة البيانات: ملفات البيانات (CSV) وتخزين النماذج المدربة (.pkl)
+التخزين ومعالجة البيانات: ملفات البيانات(CSV) وتخزين النماذج المدربة (.pkl)
+demo
+https://carhistory-n3x2pkaeemldlc7af3a9um.streamlit.app/
