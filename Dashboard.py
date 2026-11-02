@@ -1,5 +1,5 @@
 # ==========================================
-# Car History - Dashboard (Final Version)
+# Car History - Dashboard (Final Version - Fully Responsive)
 # بالخطوط الكبيرة والألوان المريحة
 # + Condition & Accident + Price Adjustment
 # ==========================================
@@ -22,7 +22,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# Custom CSS - خطوط كبيرة + ألوان مريحة
+# Custom CSS - خطوط كبيرة + ألوان مريحة + تصميم متجاوب للجوال واللابتوب
 # ==========================================
 st.markdown("""
 <style>
@@ -75,6 +75,7 @@ st.markdown("""
         border-radius: 12px !important;
         border: none !important;
         transition: all 0.3s ease !important;
+        width: 100% !important;
     }
     
     .stButton > button:hover {
@@ -168,22 +169,12 @@ st.markdown("""
     
     .hero {
         background: linear-gradient(135deg, #FFFFFF 0%, #F0F5FA 100%);
-        padding: 3.5rem;
+        padding: 3rem;
         border-radius: 24px;
         margin-bottom: 2.5rem;
         border: 1px solid #E8EEF4;
         position: relative;
         overflow: hidden;
-    }
-    
-    .hero::after {
-        content: '🚗';
-        position: absolute;
-        top: 50%;
-        left: 3rem;
-        transform: translateY(-50%);
-        font-size: 15rem;
-        opacity: 0.06;
     }
     
     .hero-content {
@@ -214,16 +205,17 @@ st.markdown("""
         font-size: 1.35rem !important;
     }
     
+    /* شبكة الإحصائيات المتجاوبة تلقائياً مع الجوال واللابتوب */
     .metric-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 1.5rem;
         margin-bottom: 2.5rem;
     }
     
     .metric {
         background: #FFFFFF;
-        padding: 2.25rem 2rem;
+        padding: 2rem 1.5rem;
         border-radius: 20px;
         border: 1px solid #E8EEF4;
         transition: all 0.3s ease;
@@ -236,35 +228,36 @@ st.markdown("""
     }
     
     .metric-icon {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
         background: #F0F5FA;
         border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
     }
     
     .metric-label {
-        font-size: 1.15rem !important;
+        font-size: 1.1rem !important;
         color: #7B8A9B;
         font-weight: 600;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
     }
     
     .metric-value {
-        font-size: 2.8rem !important;
+        font-size: 2.4rem !important;
         font-weight: 800;
         color: #2C3E50;
         line-height: 1;
+        word-break: break-all;
     }
     
     .metric-unit {
-        font-size: 1.05rem !important;
+        font-size: 1rem !important;
         color: #A0AEBF;
-        margin-top: 0.75rem;
+        margin-top: 0.5rem;
         font-weight: 500;
     }
     
@@ -288,36 +281,38 @@ st.markdown("""
     
     .result-price {
         background: linear-gradient(135deg, #3B6EA5 0%, #5A8FC7 100%);
-        padding: 3.5rem 2rem;
+        padding: 3rem 1.5rem;
         border-radius: 24px;
         text-align: center;
         color: white;
         box-shadow: 0 20px 45px rgba(59,110,165,0.3);
+        margin-top: 1.5rem;
     }
     
     .result-price .label {
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
         opacity: 0.95;
         font-weight: 600;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
     }
     
     .result-price .amount {
-        font-size: 4.5rem !important;
+        font-size: 3.8rem !important;
         font-weight: 900;
         line-height: 1;
         margin: 0.5rem 0;
+        word-break: break-all;
     }
     
     .result-price .currency {
-        font-size: 1.4rem !important;
+        font-size: 1.3rem !important;
         opacity: 0.9;
         font-weight: 600;
     }
     
     .result-category {
         background: #FFFFFF;
-        padding: 2.5rem;
+        padding: 2rem;
         border-radius: 20px;
         border: 2px solid #D6E4F0;
         text-align: center;
@@ -325,14 +320,14 @@ st.markdown("""
     }
     
     .result-category .label {
-        font-size: 1.2rem !important;
+        font-size: 1.15rem !important;
         color: #7B8A9B;
         font-weight: 700;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
     }
     
     .result-category .value {
-        font-size: 3rem !important;
+        font-size: 2.5rem !important;
         font-weight: 800;
         color: #3B6EA5;
     }
@@ -340,46 +335,47 @@ st.markdown("""
     .empty-state {
         background: #FFFFFF;
         border: 2px dashed #D6E4F0;
-        padding: 5rem 2rem;
+        padding: 4rem 1.5rem;
         border-radius: 20px;
         text-align: center;
+        margin-top: 1.5rem;
     }
     
     .empty-state .icon {
-        font-size: 4rem;
+        font-size: 3.5rem;
         margin-bottom: 1rem;
     }
     
     .empty-state .text {
         color: #7B8A9B;
-        font-size: 1.35rem !important;
+        font-size: 1.25rem !important;
         font-weight: 600;
     }
     
     .side-stat-box {
-        padding: 1.5rem;
-        margin: 0.75rem;
+        padding: 1.25rem;
+        margin: 0.75rem 0;
         background: #F7F9FC;
         border-radius: 14px;
         text-align: center;
     }
     
     .side-stat-label {
-        font-size: 1.05rem !important;
+        font-size: 1rem !important;
         color: #7B8A9B;
         font-weight: 700;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.4rem;
     }
     
     .side-stat-value {
-        font-size: 2rem !important;
+        font-size: 1.8rem !important;
         color: #3B6EA5;
         font-weight: 800;
     }
     
     .about-card {
         background: #FFFFFF;
-        padding: 2.5rem;
+        padding: 2rem;
         border-radius: 20px;
         border: 1px solid #E8EEF4;
         height: 100%;
@@ -393,32 +389,33 @@ st.markdown("""
     }
     
     .about-card .title {
-        font-size: 1.9rem !important;
+        font-size: 1.8rem !important;
         color: #2C3E50;
         font-weight: 800;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
     }
     
     .about-card ul {
         color: #6B7A8D;
-        line-height: 2.2;
-        font-size: 1.3rem !important;
-        padding-right: 1.5rem;
+        line-height: 2;
+        font-size: 1.2rem !important;
+        padding-right: 1.2rem;
     }
     
     .about-card .value {
-        font-size: 2.5rem !important;
+        font-size: 2.2rem !important;
         color: #3B6EA5;
         font-weight: 800;
     }
     
     .tech-item {
         text-align: center;
-        padding: 2rem 1.25rem;
+        padding: 1.5rem 1rem;
         background: #FFFFFF;
         border: 1px solid #E8EEF4;
         border-radius: 20px;
         transition: all 0.3s;
+        margin-bottom: 1rem;
     }
     
     .tech-item:hover {
@@ -428,21 +425,21 @@ st.markdown("""
     }
     
     .tech-item .icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
     }
     
     .tech-item .name {
         font-weight: 700;
         color: #2C3E50;
-        font-size: 1.3rem !important;
+        font-size: 1.2rem !important;
     }
     
     .footer {
         text-align: center;
         padding: 3rem 0 1rem 0;
         color: #A0AEBF;
-        font-size: 1.15rem !important;
+        font-size: 1.1rem !important;
         font-weight: 500;
         border-top: 1px solid #E8EEF4;
         margin-top: 4rem;
@@ -470,7 +467,7 @@ reg_model, clf_model, encoders, features = load_models()
 df = load_data()
 
 # ==========================================
-# Sidebar (تقتصر الآن على التنقل والإحصائيات الثابتة)
+# Sidebar
 # ==========================================
 with st.sidebar:
     st.markdown("""
@@ -492,7 +489,7 @@ with st.sidebar:
     st.markdown("<br><br>", unsafe_allow_html=True)
     
     st.markdown("""
-    <div style='padding: 0 1.5rem; font-size: 1.05rem; color: #7B8A9B; font-weight: 700; margin-bottom: 0.5rem;'>
+    <div style='padding: 0 0.5rem; font-size: 1.05rem; color: #7B8A9B; font-weight: 700; margin-bottom: 0.5rem;'>
         أداء النماذج
     </div>
     """, unsafe_allow_html=True)
@@ -522,7 +519,7 @@ if page == "📊 لوحة المعلومات":
         <div class='hero-content'>
             <div class='hero-eyebrow'>✨ منصة التحليل الذكي</div>
             <h1>تحليل أسعار السيارات</h1>
-            <p>منصة متكاملة لتقييم السيارات المستعملة باستخدام الذكاء الاصطناعي، تمنحك رؤية واضحة ودقيقة للسوق</p>
+            <p>منصة متكاملة لتقييم السيارات المستعملة باستخدام الذكاء الاصطناعي، تمنحك رؤية واضحة ودقيقة للسوق[cite: 1]</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -556,6 +553,7 @@ if page == "📊 لوحة المعلومات":
     </div>
     """, unsafe_allow_html=True)
     
+    # استخدام st.columns مع دعم التجاوب التلقائي للشاشات
     col1, col2 = st.columns(2)
     
     with col1:
@@ -571,14 +569,14 @@ if page == "📊 لوحة المعلومات":
             textposition='outside',
             textinfo='percent+label',
             marker=dict(line=dict(color='white', width=3)),
-            textfont=dict(size=16, family='Cairo', color='#2C3E50')
+            textfont=dict(size=15, family='Cairo', color='#2C3E50')
         )
         fig.update_layout(
-            height=450,
+            height=420,
             showlegend=False,
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            margin=dict(t=50, b=50, l=50, r=50)
+            margin=dict(t=30, b=30, l=30, r=30)
         )
         st.plotly_chart(fig, use_container_width=True)
     
@@ -593,16 +591,16 @@ if page == "📊 لوحة المعلومات":
             color_continuous_scale=['#D6E4F0', '#7BA8D1', '#3B6EA5']
         )
         fig.update_layout(
-            height=450,
+            height=420,
             showlegend=False,
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
             xaxis_title="",
             yaxis_title="",
-            font=dict(size=15, family='Cairo', color='#2C3E50'),
-            xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-            yaxis=dict(gridcolor='rgba(0,0,0,0)', tickfont=dict(size=15)),
-            margin=dict(t=20, b=20, l=20, r=20)
+            font=dict(size=14, family='Cairo', color='#2C3E50'),
+            xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+            yaxis=dict(gridcolor='rgba(0,0,0,0)', tickfont=dict(size=14)),
+            margin=dict(t=20, b=20, l=10, r=10)
         )
         fig.update_traces(marker_line_color='white', marker_line_width=1)
         st.plotly_chart(fig, use_container_width=True)
@@ -620,20 +618,20 @@ if page == "📊 لوحة المعلومات":
         fillcolor='rgba(59,110,165,0.15)'
     )
     fig.update_layout(
-        height=450,
+        height=420,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         xaxis_title="سنة الصنع",
         yaxis_title="متوسط السعر (SAR)",
-        font=dict(size=15, family='Cairo', color='#2C3E50'),
-        xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-        yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-        margin=dict(t=20, b=20, l=20, r=20)
+        font=dict(size=14, family='Cairo', color='#2C3E50'),
+        xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+        yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+        margin=dict(t=20, b=20, l=10, r=10)
     )
     st.plotly_chart(fig, use_container_width=True)
 
 # ==========================================
-# Page 2: Prediction (تم نقل المدخلات إلى الصفحة الرئيسية مباشرة لتظهر على الجوال)
+# Page 2: Prediction
 # ==========================================
 elif page == "🔮 التنبؤ بالسعر":
     
@@ -647,12 +645,11 @@ elif page == "🔮 التنبؤ بالسعر":
     </div>
     """, unsafe_allow_html=True)
     
-    col1, col2 = st.columns([1, 1])
+    col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("<div class='section-title'>مواصفات السيارة</div>", unsafe_allow_html=True)
         
-        # استخدام st بدلاً من st.sidebar لتظهر بوضوح في الصفحة الرئيسية
         make = st.selectbox("الماركة (Make)", options=df['Make'].unique()[:20])
         model = st.text_input("الموديل (Model)", value="Corolla")
         year = st.slider("سنة الصنع (Year)", 1990, 2024, 2020)
@@ -670,7 +667,7 @@ elif page == "🔮 التنبؤ بالسعر":
         )
         
         st.markdown("<br>", unsafe_allow_html=True)
-        predict_btn = st.button("🔮 احسب السعر المتوقع", type="primary", use_container_width=True)
+        predict_btn = st.button("🔮 احسب السعر المتوقع", type="primary")
     
     with col2:
         st.markdown("<div class='section-title'>النتيجة</div>", unsafe_allow_html=True)
@@ -697,13 +694,9 @@ elif page == "🔮 التنبؤ بالسعر":
                     except:
                         input_data[col] = 0
             
-            # التنبؤ الأساسي
             predicted_price = reg_model.predict(input_data)[0]
             predicted_category = clf_model.predict(input_data)[0]
             
-            # ============================================
-            # تعديل السعر يدوياً حسب Condition و Accident
-            # ============================================
             base_price = predicted_price
             adjustment_reason = []
             
@@ -718,7 +711,6 @@ elif page == "🔮 التنبؤ بالسعر":
                 predicted_price *= 0.82
                 adjustment_reason.append("حادث (-18%)")
             
-            # عرض السعر المتوقع
             st.markdown(f"""
             <div class='result-price'>
                 <div class='label'>💰 السعر المتوقع</div>
@@ -743,13 +735,13 @@ elif page == "🔮 التنبؤ بالسعر":
             fig = go.Figure(go.Indicator(
                 mode="gauge+number",
                 value=predicted_price,
-                number={'font': {'size': 44, 'color': '#2C3E50', 'family': 'Cairo'}, 'suffix': ' SAR'},
+                number={'font': {'size': 36, 'color': '#2C3E50', 'family': 'Cairo'}, 'suffix': ' SAR'},
                 gauge={
                     'axis': {
                         'range': [0, df['Price_SAR'].max()],
                         'tickwidth': 1,
                         'tickcolor': '#E8EEF4',
-                        'tickfont': {'color': '#7B8A9B', 'size': 13}
+                        'tickfont': {'color': '#7B8A9B', 'size': 12}
                     },
                     'bar': {'color': "#3B6EA5", 'thickness': 0.3},
                     'bgcolor': "white",
@@ -767,10 +759,10 @@ elif page == "🔮 التنبؤ بالسعر":
                 }
             ))
             fig.update_layout(
-                height=380,
+                height=350,
                 paper_bgcolor='rgba(0,0,0,0)',
                 font=dict(family='Cairo'),
-                margin=dict(t=20, b=20, l=20, r=20)
+                margin=dict(t=10, b=10, l=10, r=10)
             )
             st.plotly_chart(fig, use_container_width=True)
         else:
@@ -810,15 +802,15 @@ elif page == "📈 الإحصائيات":
         color_discrete_sequence=['#3B6EA5']
     )
     fig.update_layout(
-        height=450,
+        height=420,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         xaxis_title="السعر (SAR)",
         yaxis_title="",
-        font=dict(size=15, family='Cairo', color='#2C3E50'),
-        xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-        yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-        margin=dict(t=20, b=20, l=20, r=20)
+        font=dict(size=14, family='Cairo', color='#2C3E50'),
+        xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+        yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+        margin=dict(t=20, b=20, l=10, r=10)
     )
     st.plotly_chart(fig, use_container_width=True)
     
@@ -834,14 +826,14 @@ elif page == "📈 الإحصائيات":
             color_discrete_sequence=['#3B6EA5', '#7BA8D1', '#B8D0E5']
         )
         fig.update_layout(
-            height=450,
+            height=420,
             showlegend=False,
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(size=15, family='Cairo', color='#2C3E50'),
-            xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-            yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-            margin=dict(t=20, b=20, l=20, r=20)
+            font=dict(size=14, family='Cairo', color='#2C3E50'),
+            xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+            yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+            margin=dict(t=20, b=20, l=10, r=10)
         )
         st.plotly_chart(fig, use_container_width=True)
     
@@ -856,16 +848,16 @@ elif page == "📈 الإحصائيات":
             color_continuous_scale=['#D6E4F0', '#7BA8D1', '#3B6EA5']
         )
         fig.update_layout(
-            height=450,
+            height=420,
             showlegend=False,
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
             xaxis_title="",
             yaxis_title="",
-            font=dict(size=15, family='Cairo', color='#2C3E50'),
-            xaxis=dict(gridcolor='rgba(0,0,0,0)', tickfont=dict(size=14)),
-            yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-            margin=dict(t=20, b=20, l=20, r=20)
+            font=dict(size=14, family='Cairo', color='#2C3E50'),
+            xaxis=dict(gridcolor='rgba(0,0,0,0)', tickfont=dict(size=13)),
+            yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+            margin=dict(t=20, b=20, l=10, r=10)
         )
         st.plotly_chart(fig, use_container_width=True)
     
@@ -880,14 +872,14 @@ elif page == "📈 الإحصائيات":
         color_discrete_sequence=['#3B6EA5', '#7BA8D1', '#B8D0E5']
     )
     fig.update_layout(
-        height=550,
+        height=480,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(size=15, family='Cairo', color='#2C3E50'),
-        xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-        yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=14)),
-        margin=dict(t=20, b=20, l=20, r=20),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=14, family='Cairo'))
+        font=dict(size=14, family='Cairo', color='#2C3E50'),
+        xaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+        yaxis=dict(gridcolor='#F0F5FA', zeroline=False, tickfont=dict(size=13)),
+        margin=dict(t=20, b=20, l=10, r=10),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=13, family='Cairo'))
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -927,10 +919,10 @@ else:
         <div class='about-card'>
             <div class='label'>📊 البيانات</div>
             <div class='title'>OLX Pakistan</div>
-            <table style='width: 100%; margin-top: 0.5rem; color: #6B7A8D; font-size: 1.3rem;'>
-                <tr><td style='padding: 0.9rem 0;'>عدد السيارات</td><td style='text-align: left; color: #2C3E50; font-weight: 700;'>9,179</td></tr>
-                <tr><td style='padding: 0.9rem 0;'>الميزات</td><td style='text-align: left; color: #2C3E50; font-weight: 700;'>8 features</td></tr>
-                <tr><td style='padding: 0.9rem 0;'>العملة</td><td style='text-align: left; color: #2C3E50; font-weight: 700;'>SAR</td></tr>
+            <table style='width: 100%; margin-top: 0.5rem; color: #6B7A8D; font-size: 1.2rem;'>
+                <tr><td style='padding: 0.8rem 0;'>عدد السيارات</td><td style='text-align: left; color: #2C3E50; font-weight: 700;'>9,179</td></tr>
+                <tr><td style='padding: 0.8rem 0;'>الميزات</td><td style='text-align: left; color: #2C3E50; font-weight: 700;'>8 features</td></tr>
+                <tr><td style='padding: 0.8rem 0;'>العملة</td><td style='text-align: left; color: #2C3E50; font-weight: 700;'>SAR</td></tr>
             </table>
         </div>
         """, unsafe_allow_html=True)
@@ -941,7 +933,7 @@ else:
             <div class='label'>📈 نموذج الانحدار</div>
             <div class='title'>Random Forest Regressor</div>
             <div style='display: flex; justify-content: space-between; margin-top: 1.5rem; align-items: baseline;'>
-                <span style='color: #7B8A9B; font-size: 1.2rem; font-weight: 600;'>دقة R²</span>
+                <span style='color: #7B8A9B; font-size: 1.1rem; font-weight: 600;'>دقة R²</span>
                 <span class='value'>0.9411</span>
             </div>
         </div>
@@ -953,8 +945,8 @@ else:
         <div class='about-card'>
             <div class='label'>🎯 نموذج التصنيف</div>
             <div class='title'>Random Forest Classifier</div>
-            <div style='display: flex; justify-content: space-between; margin-top: 1.5rem; align-items: baseline;'>
-                <span style='color: #7B8A9B; font-size: 1.2rem; font-weight: 600;'>الدقة</span>
+            <div style='display: flex; justify-content: space-between; margin-top: 1.5rem; align-items: baseline;'>ي
+                <span style='color: #7B8A9B; font-size: 1.1rem; font-weight: 600;'>الدقة</span>
                 <span class='value'>96%</span>
             </div>
         </div>
