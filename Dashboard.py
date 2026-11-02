@@ -1,6 +1,6 @@
 # ==========================================
 # Car History - Dashboard (Final Version)
-# باالخطوط الكبيرة والألوان المريحة
+# بالخطوط الكبيرة والألوان المريحة
 # + Condition & Accident + Price Adjustment
 # ==========================================
 
@@ -470,7 +470,7 @@ reg_model, clf_model, encoders, features = load_models()
 df = load_data()
 
 # ==========================================
-# Sidebar
+# Sidebar (تقتصر الآن على التنقل والإحصائيات الثابتة)
 # ==========================================
 with st.sidebar:
     st.markdown("""
@@ -633,7 +633,7 @@ if page == "📊 لوحة المعلومات":
     st.plotly_chart(fig, use_container_width=True)
 
 # ==========================================
-# Page 2: Prediction
+# Page 2: Prediction (تم نقل المدخلات إلى الصفحة الرئيسية مباشرة لتظهر على الجوال)
 # ==========================================
 elif page == "🔮 التنبؤ بالسعر":
     
@@ -652,6 +652,7 @@ elif page == "🔮 التنبؤ بالسعر":
     with col1:
         st.markdown("<div class='section-title'>مواصفات السيارة</div>", unsafe_allow_html=True)
         
+        # استخدام st بدلاً من st.sidebar لتظهر بوضوح في الصفحة الرئيسية
         make = st.selectbox("الماركة (Make)", options=df['Make'].unique()[:20])
         model = st.text_input("الموديل (Model)", value="Corolla")
         year = st.slider("سنة الصنع (Year)", 1990, 2024, 2020)
@@ -706,7 +707,6 @@ elif page == "🔮 التنبؤ بالسعر":
             base_price = predicted_price
             adjustment_reason = []
             
-            # تعديل حسب حالة السيارة
             if condition == 'New':
                 predicted_price *= 1.15
                 adjustment_reason.append("سيارة جديدة (+15%)")
@@ -714,7 +714,6 @@ elif page == "🔮 التنبؤ بالسعر":
                 predicted_price *= 1.07
                 adjustment_reason.append("شبه جديدة (+7%)")
             
-            # تعديل حسب سجل الحوادث
             if accident == 'Yes':
                 predicted_price *= 0.82
                 adjustment_reason.append("حادث (-18%)")
@@ -735,7 +734,6 @@ elif page == "🔮 التنبؤ بالسعر":
             </div>
             """, unsafe_allow_html=True)
             
-            # عرض تفاصيل التعديل
             if adjustment_reason:
                 st.info(f"💡 **تم تعديل السعر بناءً على:** {' و '.join(adjustment_reason)}")
                 st.caption(f"السعر الأساسي قبل التعديل: {base_price:,.0f} SAR")
